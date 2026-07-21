@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rapidea.fr"),
+  metadataBase: new URL("https://rapidea.biganeway.fr"),
   title: {
     default: "Rapidea — L’assistant IA qui prend vos commandes sur WhatsApp",
     template: "%s — Rapidea",
@@ -24,13 +24,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://rapidea.fr/",
+    url: "https://rapidea.biganeway.fr/",
     title: "Rapidea — Assistant IA pour commandes WhatsApp",
     description:
       "Automatisez la prise de commandes sur WhatsApp grâce à l’intelligence artificielle.",
     images: [
       {
-        url: "https://rapidea.ai/og.png",
+        url: "https://rapidea.biganeway.fr/og.png",
         width: 1200,
         height: 630,
         alt: "Rapidea — Assistant IA sur WhatsApp",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Rapidea — Assistant IA pour commandes WhatsApp",
     description:
       "Automatisez la prise de commandes sur WhatsApp grâce à l’intelligence artificielle.",
-    images: ["https://rapidea.ai/og.png"],
+    images: ["https://rapidea.biganeway.fr/og.png"],
   },
 };
 

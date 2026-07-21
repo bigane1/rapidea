@@ -16,8 +16,8 @@ export const EMAIL_DISPLAY = EMAIL_CONTACT;
 
 export const COMPANY_WEBSITE = "https://biganeway.fr";
 export const COMPANY_WEBSITE_DISPLAY = "biganeway.fr";
-export const PRODUCT_WEBSITE = "https://rapidea.fr";
-export const PRODUCT_WEBSITE_DISPLAY = "rapidea.fr";
+export const PRODUCT_WEBSITE = "https://rapidea.biganeway.fr";
+export const PRODUCT_WEBSITE_DISPLAY = "rapidea.biganeway.fr";
 
 /** Informations légales de l'éditeur (Entrepreneur individuel) */
 export const LEGAL = {
