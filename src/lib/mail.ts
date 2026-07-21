@@ -1,3 +1,5 @@
+import { existsSync, readFileSync } from "fs";
+import { resolve } from "path";
 import nodemailer from "nodemailer";
 import { EMAIL_CONTACT } from "@/lib/constants";
 
@@ -9,7 +11,35 @@ export type LeadPayload = {
   message: string;
 };
 
+/** Charge /var/www/rapidea/.env si PM2/Next n'a pas injecté les variables. */
+function loadEnvFileIfNeeded() {
+  if (process.env.SMTP_USER && process.env.SMTP_PASS) return;
+
+  const envPath = resolve(process.cwd(), ".env");
+  if (!existsSync(envPath)) return;
+
+  const content = readFileSync(envPath, "utf8");
+  for (const rawLine of content.split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith("#")) continue;
+    const eq = line.indexOf("=");
+    if (eq <= 0) continue;
+    const key = line.slice(0, eq).trim();
+    let value = line.slice(eq + 1).trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+    if (!(key in process.env) || !process.env[key]) {
+      process.env[key] = value;
+    }
+  }
+}
+
 function requireEnv(name: string): string {
+  loadEnvFileIfNeeded();
   const value = process.env[name];
   if (!value) {
     throw new Error(`Variable d'environnement manquante: ${name}`);
@@ -32,6 +62,7 @@ export function createSmtpTransport() {
 }
 
 export async function sendLeadEmail(lead: LeadPayload) {
+  loadEnvFileIfNeeded();
   const transporter = createSmtpTransport();
   const from = process.env.SMTP_FROM || EMAIL_CONTACT;
   const to = process.env.SMTP_TO || EMAIL_CONTACT;
