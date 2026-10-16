@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import {
   COMPANY_WEBSITE,
   COMPANY_WEBSITE_DISPLAY,
+  EMAIL_CONTACT,
   EMAIL_DISPLAY,
   TELEPHONE_DISPLAY,
   WHATSAPP_DISPLAY,
@@ -39,12 +40,16 @@ export function Contact() {
 
     setStatus("sending");
     try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Request failed");
+      const subject = encodeURIComponent(`Demande de démo Rapidea - ${form.company}`);
+      const body = encodeURIComponent(
+        `Nom: ${form.name}
+Entreprise: ${form.company}
+Téléphone: ${form.phone}
+Email: ${form.email}
+
+${form.message}`
+      );
+      window.location.href = `mailto:${EMAIL_CONTACT}?subject=${subject}&body=${body}`;
       setStatus("sent");
     } catch {
       setStatus("error");

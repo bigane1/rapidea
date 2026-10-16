@@ -17,7 +17,7 @@ export default function Home() {
       {
         "@type": "Organization",
         name: "Rapidea",
-        url: "https://rapidea.biganeway.fr/",
+        url: "https://rapidea.fr/",
         email: "contact@biganeway.fr",
         telephone: "+33660545275",
         sameAs: ["https://biganeway.fr"],
